@@ -4,9 +4,10 @@ import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import Message
 from aiogram.filters import Command
+from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from collections import defaultdict
 
-TOKEN = os.getenv("TOKEN")  # Безопасно берём токен из переменной окружения
+TOKEN = os.getenv("TOKEN")
 
 DATA_FILE = "trash.json"
 
@@ -25,18 +26,29 @@ trash_counts = load_data()
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
+# Функция генерации клавиатуры
+def get_main_keyboard():
+    builder = ReplyKeyboardBuilder()
+    builder.button(text="🗑 Вынес мусор")
+    builder.button(text="📊 Посмотреть статистику")
+    builder.adjust(2)
+    return builder.as_markup(resize_keyboard=True)
+
 @dp.message(Command("start"))
 async def start(message: Message):
-    await message.answer("Привет! Пиши /trash, когда вынес мусор. /stats покажет счёт.")
+    await message.answer(
+        "Привет! Нажимай кнопки ниже:",
+        reply_markup=get_main_keyboard()
+    )
 
-@dp.message(Command("trash"))
+@dp.message(lambda msg: msg.text == "🗑 Вынес мусор")
 async def handle_trash(message: Message):
     user = message.from_user.first_name
     trash_counts[user] += 1
     save_data(trash_counts)
     await message.answer(f"{user}, ты вынес мусор {trash_counts[user]} раз(а)!")
 
-@dp.message(Command("stats"))
+@dp.message(lambda msg: msg.text == "📊 Посмотреть статистику")
 async def stats(message: Message):
     if not trash_counts:
         await message.answer("Ещё никто не выносил мусор.")
