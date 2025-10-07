@@ -7,7 +7,7 @@ from aiogram.filters import Command
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from collections import defaultdict
 
-TOKEN = os.getenv("7729743552:AAFFJM5cG9cDbT_lwvMpOYqWKF28YPDHBNg")
+bot = Bot(token="7729743552:AAFFJM5cG9cDbT_lwvMpOYqWKF28YPDHBNg")
 DATA_FILE = "trash.json"
 ADMIN_IDS = [967075066]  # 🔐 ЗАМЕНИ на свой Telegram ID
 
@@ -28,7 +28,7 @@ def save_data(data):
 trash_counts = load_data()
 user_ids = {}
 
-bot = Bot(token=7729743552:AAFFJM5cG9cDbT_lwvMpOYqWKF28YPDHBNg)
+bot = Bot(token="7729743552:AAFFJM5cG9cDbT_lwvMpOYqWKF28YPDHBNg")
 dp = Dispatcher()
 
 def get_main_keyboard():
