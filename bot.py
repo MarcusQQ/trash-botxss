@@ -28,7 +28,7 @@ def save_data(data):
 trash_counts = load_data()
 user_ids = {}
 
-bot = Bot(token=TOKEN)
+bot = Bot(token=7729743552:AAFFJM5cG9cDbT_lwvMpOYqWKF28YPDHBNg)
 dp = Dispatcher()
 
 def get_main_keyboard():
