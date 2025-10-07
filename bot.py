@@ -7,7 +7,7 @@ from aiogram.filters import Command
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from collections import defaultdict
 
-TOKEN = os.getenv("TOKEN")
+TOKEN = os.getenv("7729743552:AAFFJM5cG9cDbT_lwvMpOYqWKF28YPDHBNg")
 DATA_FILE = "trash.json"
 ADMIN_IDS = [967075066]  # 🔐 ЗАМЕНИ на свой Telegram ID
 
